@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Dinamico</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script lang="JavaScript">
+        function calendario() {
+    const mesI = document.getElementById("mes");
+    const anoI = document.getElementById("ano");
+    const calendarioDiv = document.getElementById("calendario");
+    const mes= parseInt(mesI.value);
+    const ano = parseInt(anoI.value);
+
+    const diasDoMes = new Date(ano, mes+ 1, 0).getDate();
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+
+    let calendarioHTML = "<table>";
+    calendarioHTML += "<tr><th>Domingo</th><th>Segunda</th><th>Terça</th><th>Quarta</th><th>Quinta</th><th>Sexta</th><th>Sábado</th></tr>";
+    let x = 1;
+
+    for (let i = 0; i < 6; i++) {
+      calendarioHTML += "<tr>";
+      for (let z = 0; z < 7; z++) {
+        if (i === 0 && z < primeiroDia) {
+          calendarioHTML += "<td></td>";
+        } else if (x > diasDoMes) {
+          calendarioHTML += "<td></td>";
+        } else {
+          calendarioHTML += `<td>${x}</td>`;
+          x++;
+        }
+      }
+      calendarioHTML += "</tr>";
+    }
+
+    calendarioHTML += "</table>";
+    calendarioDiv.innerHTML = calendarioHTML;
+  }
+    </script>
+
+    
+</head>
+
+<body>
+
+    <h1>Calendário Dinâmico</h1>
+    <label for="mes">Mês:</label>
+    <select id="mes">
+        <option value="0">Janeiro</option>
+        <option value="1">Fevereiro</option>
+        <option value="2">Março</option>
+        <option value="3">Abril</option>
+        <option value="4">Maio</option>
+        <option value="5">Junho</option>
+        <option value="6">Julho</option>
+        <option value="7">Agosto</option>
+        <option value="8">Setembro</option>
+        <option value="9">Outubro</option>
+        <option value="10">Novembro</option>
+        <option value="11">Dezembro</option>
+    </select>
+    <label for="ano">Ano:</label>
+    <input type="number" id="ano" min="1900" max="2100">
+    <button onclick="calendario()">Gerar Calendário</button>
+    <div id="calendario"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
